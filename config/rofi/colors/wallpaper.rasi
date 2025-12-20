@@ -1,10 +1,10 @@
 ///**** Rofi matugen color theme ****///
 
 * {
-    background: #f8f9ff;
-    background-alt: #eceef4;
-    foreground: #191c20;
-    selected: #35618e;
-    active: #6b5778;
-    urgent: #ba1a1a;
+    background: #16130b;
+    background-alt: #221f17;
+    foreground: #e9e2d4;
+    selected: #dfc56d;
+    active: #abd0b1;
+    urgent: #ffb4ab;
 }

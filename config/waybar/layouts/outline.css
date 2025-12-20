@@ -3,7 +3,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Font Awesome 5 Free", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "JetBrains Mono", "Iosevka Term", Inter, Adwaita,  Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
     min-height: 0;
 }
@@ -20,8 +20,8 @@ tooltip {
     border-radius: 8px;
 }
 tooltip label {
-
     color: @bar_fg;
+    text-shadow: none;
 }
 
 /* --- Modules: Base --- */

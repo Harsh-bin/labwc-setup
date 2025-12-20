@@ -4,7 +4,7 @@
 set -u
 
 # Notify user about the script launch
-notify-send "   Checking for Wi-Fi..."
+notify-send "       Checking for Wi-Fi..."
 
 # --- Configuration ---
 LIST_THEME="$HOME/.config/rofi/wifi/list.rasi"
@@ -48,7 +48,7 @@ connect_secure_loop() {
             exit 0
         fi
 
-        notify-send "   Connecting to \"$target_ssid\""
+        notify-send "       Connecting to \"$target_ssid\""
 
         # Delete the old connection profile to ensure a fresh start.
         nmcli connection delete id "$target_ssid" &> /dev/null
@@ -58,12 +58,12 @@ connect_secure_loop() {
         output=$(nmcli dev wifi connect "$target_ssid" password "$pass" 2>&1)
 
         if [[ $? -eq 0 ]]; then
-            notify-send "   Connected to \"$target_ssid\""
+            notify-send "       Connected to \"$target_ssid\""
             break
         else
             # Capture error for the next retry prompt
             error_output=$(echo "$output" | sed 's/Error: //')
-            notify-send "   Connection Failed" "Retrying..."
+            notify-send "       Connection Failed" "Retrying..."
         fi
     done
 }
@@ -77,7 +77,7 @@ if [[ "$wifi_status" == "disabled" ]]; then
     choice=$(enable_wifi_menu)
     [[ -z "$choice" ]] && exit 0
   	nmcli radio wifi on
-    notify-send " 󱚽  Wi-Fi Enabled..."
+    notify-send " 󱚽      Wi-Fi Enabled..."
     exit 0
 fi
 
@@ -111,7 +111,7 @@ case "$raw_choice" in
 
     *"Disable Wi-Fi"*)
         nmcli radio wifi off
-        notify-send " 󱚼  Wi-Fi Disabled..."
+        notify-send " 󱚼      Wi-Fi Disabled..."
         ;;
 
     *"Manual Setup"*)
@@ -124,7 +124,7 @@ case "$raw_choice" in
     *"Connected to"*)
         # Disconnects from the wifi network
         nmcli connection down "$connected_ssid"
-        notify-send " 󱛅  Disconnected from \"$connected_ssid\""
+        notify-send " 󱛅      Disconnected from \"$connected_ssid\""
         ;;
     
     *"Wi-Fi not connected"*)
@@ -141,13 +141,13 @@ case "$raw_choice" in
 
         # Try saved profile first (Auto-Connect)
         if [[ "$saved_profile_exists" == "true" ]]; then
-            notify-send "   Connecting to saved network: \"$ssid_name\""
+            notify-send "       Connecting to saved network: \"$ssid_name\""
             
             if nmcli dev wifi connect "$ssid_name" > /dev/null 2>&1; then
-                notify-send "   Connected to \"$ssid_name\""
+                notify-send "       Connected to \"$ssid_name\""
                 exit 0
             else
-                notify-send "   Login failed. Retrying with password..."
+                notify-send "       Login failed. Retrying with password..."
                 # If auto-connect fails, we assume the saved password is wrong.
             fi
         fi
@@ -158,11 +158,11 @@ case "$raw_choice" in
             connect_secure_loop "$ssid_name"
         else
             # Open Network
-            notify-send "   Connecting to \"$ssid_name\""
+            notify-send "       Connecting to \"$ssid_name\""
             if nmcli dev wifi connect "$ssid_name" > /dev/null 2>&1; then
-                 notify-send "   Connected to \"$ssid_name\""
+                 notify-send "       Connected to \"$ssid_name\""
             else
-                 notify-send "   Connection Failed..."
+                 notify-send "       Connection Failed..."
             fi
         fi
         ;;

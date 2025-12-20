@@ -124,4 +124,8 @@ else
     player_status=""
 fi
 
-echo -e "<span font_weight='light' size='small'>${player_display_name} <small>${player_status}</small></span>\n<b>${song_title}</b>    <span style='italic'>${song_artist}</span>"
+# Added truncate function for song title
+short_title=$(echo "$song_title" | sed -E "s/^(.{60}).+/\1.../")
+# Print Output 
+echo -e "<span font_weight='light' size='small'>${player_display_name} <small>${player_status}</small></span>\n<b>${short_title}</b>    <span style='italic'>${song_artist}</span>"
+

@@ -1,5 +1,5 @@
 /** Main waybar css **/
-
+/** You shouldn't edit this file directly, instead edit the imported files **/
 
 /** just to triggre css refresh **/
 
@@ -8,7 +8,7 @@
 @import "colors/wallpaper.css";
 
 /** Imports a layout (style) for bar **/
-@import "layouts/pill.css";
+@import "layouts/outline.css";
 
 
 /** Sets bar background transparency **/

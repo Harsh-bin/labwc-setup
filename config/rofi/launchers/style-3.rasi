@@ -11,11 +11,11 @@
 configuration {
 	modi:                       "drun,run,filebrowser,ssh,window";
     show-icons:                 false;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
-    display-window:             " Windows";
-	display-ssh:                " SSH";
+    display-drun:               "   Apps";
+    display-run:                "   Run";
+    display-filebrowser:        "   Files";
+    display-window:             "   Windows";
+	display-ssh:                "   SSH";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -126,7 +126,6 @@ textbox-prompt-colon {
     enabled:                     true;
     padding:                     5px 0px;
     expand:                      false;
-    str:                         "";
     background-color:            inherit;
     text-color:                  inherit;
 }
@@ -136,7 +135,7 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search...";
+    placeholder:                 "  Search...";
     placeholder-color:           inherit;
 }
 num-filtered-rows {

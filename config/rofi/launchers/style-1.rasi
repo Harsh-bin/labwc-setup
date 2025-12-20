@@ -11,10 +11,10 @@
 configuration {
 	modi:                       "drun,run,filebrowser";
     show-icons:                 false;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
-    display-window:             " Windows";
+    display-drun:               "   Apps";
+    display-run:                "   Run";
+    display-filebrowser:        "   Files";
+    display-window:             "   Windows";
 	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -63,7 +63,7 @@ window {
     /* properties for all widgets */
     enabled:                     true;
     margin:                      0px;
-    padding:                     0px;
+    padding:                     10px;
     border:                      1px solid;
     border-radius:               20px;
     border-color:                @border-colour;
@@ -85,7 +85,7 @@ mainbox {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     40px;
+    padding:                     20px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
     border-color:                @border-colour;
@@ -98,11 +98,11 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     margin:                      0px;
-    padding:                     0px;
+    padding:                     10px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               20px;
     border-color:                @border-colour;
-    background-color:            transparent;
+    background-color:            @background-alt;
     text-color:                  @foreground-colour;
     children:                    [ "prompt", "textbox-prompt-colon", "entry" ];
 }
@@ -176,7 +176,7 @@ listview {
     cursor:                      "default";
 }
 scrollbar {
-    handle-width:                10px ;
+    handle-width:                5px ;
     handle-color:                @handle-colour;
     border-radius:               10px;
     background-color:            @alternate-background;

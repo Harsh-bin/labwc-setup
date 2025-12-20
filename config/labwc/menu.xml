@@ -482,29 +482,5 @@
                 </action>
             </item>
         </menu> <!-- Utilities -->
-        <separator />
-        <item label="Terminal" icon="/usr/share/icons/Papirus/48x48/apps/terminal.svg">
-            <action name="Execute">
-                <command>foot</command>
-            </action>
-        </item>
-        <item label="Reconfigure" icon="/usr/share/icons/Tela/32/status/system-reboot.svg">
-            <action name="Reconfigure">
-            </action>
-        </item>
-        <item label="Proton VPN" icon="/usr/share/icons/Papirus/48x48/apps/proton-vpn-logo.svg">
-            <action name="Execute">
-                <command>protonvpn-app</command>
-            </action>
-        </item>
-        <item label="Background" icon="/usr/share/icons/Papirus/48x48/apps/preferences-desktop-wallpaper.svg">
-            <action name="Execute">
-                <command>sh -c &apos;/home/init_harsh/.config/rofi/wallselect/wallselect.sh&apos;</command>
-            </action>
-        </item>
-        <item label="Exit" icon="/usr/share/icons/Tela/32/status/system-log-out.svg">
-            <action name="Exit">
-            </action>
-        </item>
     </menu>
 </openbox_menu>

@@ -11,7 +11,7 @@ size = 10.0
 
 [font.normal]
 family = "JetBrainsMono NF"
-style = "Bold"
+style = "Regular"
 
 [font.bold]
 family = "JetBrainsMono NF"

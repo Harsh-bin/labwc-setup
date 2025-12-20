@@ -12,7 +12,7 @@ swww-daemon >/dev/null 2>&1 &
 
 # Polkit 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &
-
+ 
 # Gtk Theme Refresh
 bash ~/.config/labwc/gtk.sh >/dev/null 2>&1 &
 
@@ -24,19 +24,17 @@ wl-paste --type image --watch cliphist store &
 # Waybar
 (sleep 0.5; waybar --log-level off >/dev/null 2>&1 &)
 
-# API
-(sleep 0.5; python3 /home/init_harsh/scripts/tab/d-tab/api.py >/dev/null 2>&1 &)
-(sleep 0.5; python3 /home/init_harsh/scripts/tab/clean-tab/api-clean.py >/dev/null 2>&1 &)
-
 # Notification 
 dunst >/dev/null 2>&1 &
 
 # Idle device manager
 swayidle -w \
-    lock 'sh -c ~/.config/labwc/idle/lock_ctrl.sh' \
-    timeout 300 '(~/.config/labwc/idle/brightness_ctrl.sh --fade-out)' \
-    resume '(~/.config/labwc/idle/brightness_ctrl.sh --fade-in)' \
-    timeout 600 'loginctl lock-session' \
-    before-sleep 'sh -c ~/.config/labwc/idle/sleep_ctrl.sh' \
-    after-resume '(~/.config/labwc/idle/brightness_ctrl.sh --fade-in)' > "$HOME/.config/labwc/idle/idle.log" &
+    timeout 300 "~/.config/labwc/idle/brightness_ctrl.sh --fade-out" \
+    resume "~/.config/labwc/idle/brightness_ctrl.sh --fade-in" \
+    timeout 600 "loginctl lock-session" \
+    timeout 1800 "systemctl suspend" \
+    lock "~/.config/labwc/idle/lock_ctrl.sh" \
+    before-sleep "~/.config/labwc/idle/sleep_ctrl.sh" \
+    after-resume "~/.config/labwc/idle/brightness_ctrl.sh --fade-in" \
+    > "$HOME/.config/labwc/idle/idle.log" 2>&1 &
 

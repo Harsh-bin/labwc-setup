@@ -5,8 +5,7 @@ configuration {
 }
 
 @import "~/.config/rofi/shared/colors.rasi"
-@import "~/.config/rofi/shared/fonts.rasi" 
-
+ 
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
@@ -49,7 +48,7 @@ textbox-msg {
     horizontal-align:            0.5;
     vertical-align:              0.5;
     str:                         "  Now Playing"; 
-    font:                        "JetBrains Mono Bold 16";
+    font:                        "JetBrains Mono Nerd Font 14";
 }
 
 middle-wrapper {
@@ -86,7 +85,7 @@ textbox-custom {
     vertical-align:              0.5;
     horizontal-align:            0.5;
     markup:                      true; 
-    font:                        "JetBrains Mono Bold 14";
+    font:                        "JetBrains Mono Nerd Font 12";
     str:                         "Loading...";
 }
 
@@ -105,7 +104,7 @@ listview {
 
 element {
     enabled:                     true;
-    padding:                     12px;
+    padding:                     5px;
     border-radius:               100%; 
     cursor:                      pointer;
     background-color:            @background-alt;
@@ -124,5 +123,5 @@ element-text {
     cursor:                      inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
-    font:                        "JetBrains Mono 14";
+    font:                        "JetBrains Mono Nerd Font 16";
 }

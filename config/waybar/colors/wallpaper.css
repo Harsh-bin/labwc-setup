@@ -1,13 +1,13 @@
 /* waybar matugen colors */
 
-@define-color bar_bg #f8f9ff;
-@define-color bar_fg #191c20;
-@define-color module_bg #eceef4; 
+@define-color bar_bg #16130b;
+@define-color bar_fg #e9e2d4;
+@define-color module_bg #221f17; 
 @define-color module_fg @bar_fg;
-@define-color hover_bg #35618e;
-@define-color hover_fg #ffffff;
-@define-color border_color #73777f;
+@define-color hover_bg #dfc56d;
+@define-color hover_fg #3b2f00;
+@define-color border_color #979080;
 @define-color launcher @hover_bg;
-@define-color special #f2daff;
+@define-color special #2d4e36;
 @define-color special_fg @module_fg;
-@define-color power #ba1a1a;
+@define-color power #ffb4ab;

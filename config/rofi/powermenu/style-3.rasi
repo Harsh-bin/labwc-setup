@@ -32,7 +32,7 @@ window {
 
     padding:                     0px;
     border:                      1px solid;
-    border-radius:               10px;
+    border-radius:               15px;
     border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
@@ -43,7 +43,7 @@ mainbox {
     enabled:                     true;
     spacing:                     0px;
     margin:                      0px;
-    padding:                     0px;
+    padding:                     10px;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @selected;
@@ -55,6 +55,7 @@ mainbox {
 inputbar {
     enabled:                     true;
     spacing:                     0px;
+    border-radius:               10px;
     padding:                     150px 40px;
     background-color:            transparent;
     background-image:            url("~/.config/rofi/images/wallpaper.png", width);
@@ -68,7 +69,7 @@ dummy {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         " System";
+    str:                         " System";
     padding:                     15px;
     border:                      0px 5px 5px 0px;
     border-radius:               15px 5px 15px 5px;
@@ -135,7 +136,7 @@ message {
     enabled:                     true;
     margin:                      0px;
     padding:                     15px;
-    border-radius:               0px;
+    border-radius:               10px;
     background-color:            @background-alt;
     text-color:                  @foreground;
 }

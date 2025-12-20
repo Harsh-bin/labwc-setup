@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#####################################
-## author @Harsh-bin Github #########
-#####################################
-
-# Monitor hardware events and play sound on device addition or removals
-
 AUDIO_FILE="$HOME/.config/labwc/sound/device-added.oga"
 
 echo "Starting hardware monitor... (Press Ctrl+C to stop)"
@@ -24,5 +18,5 @@ while true; do
         done
     }    
     paplay "$AUDIO_FILE"
-    sleep 1
+    sleep 0.5
 done

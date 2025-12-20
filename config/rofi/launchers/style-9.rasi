@@ -63,7 +63,8 @@ listbox {
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
+    margin:                      15px 15px 0px 15px ;
+    border-radius:               15px;
     padding:                     100px 60px;
     background-color:            transparent;
     background-image:            url("~/.config/rofi/images/wallpaper.png", width);
@@ -128,9 +129,7 @@ listview {
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
-    fixed-columns:               true;
-    
-    spacing:                     10px;
+    fixed-columns:               true;   
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      "default";
@@ -139,8 +138,7 @@ listview {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     10px;
-    padding:                     10px;
+    padding:                     15px;
     border-radius:               15px;
     background-color:            transparent;
     text-color:                  @foreground;

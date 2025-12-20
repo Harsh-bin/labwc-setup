@@ -7,7 +7,6 @@ configuration {
 @import                          "~/.config/rofi/shared/colors.rasi"
 @import                          "~/.config/rofi/shared/fonts.rasi"
 
-
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";

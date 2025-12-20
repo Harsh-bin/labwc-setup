@@ -8,7 +8,7 @@ vertical_style_menu="$HOME/.config/rofi/vertical_style_menu.rasi"
 
 
 # Generate a list of styles available in launcher_dir
-options=$(find "$launcher_dir" -maxdepth 1 -type f -name "*.rasi" -printf "%f\n" | sort | sed 's/\.rasi$//')
+options=$(find "$launcher_dir" -maxdepth 1 -type f -name "*.rasi" -printf "%f\n" | sed 's/\.rasi$//' | sort -t '-' -k2n)
 selected_style=$(echo -e "$options" | rofi -dmenu -mesg "<b>Select Layout</b>" -theme $vertical_style_menu)
 
 

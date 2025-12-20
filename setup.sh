@@ -10,8 +10,8 @@ nc='\033[0m' # No Color
 # --- Config Paths ---
 source="./config"
 dest="$HOME/.config"
-font_source="./fonts"
-font_dest="$HOME/.local/share/fonts"
+font_source="./fonts.tar.xz"
+font_dest="$HOME/.local/share"
 theme_source="./matugen-labwc"
 theme_dest="$HOME/.themes"
 
@@ -38,11 +38,15 @@ dependencies=(
     "swww"
     "swayidle"
     "hyprlock"
+    "qt5-wayland"
+    "qt6-wayland"
+    "nm-connection-editor"
+    "polkit-gnome"
+    "gnome-keyring"
     # Fonts & Themes
-    "ttf-jetbrains-mono"
-    "ttf-jetbrains-mono-nerd"
+    "otf-font-awesome"
+    "inter-font"
     "ttf-roboto"
-    "ttf-iosevka-nerd"
     "papirus-icon-theme"
     "adw-gtk-theme"
 )
@@ -51,25 +55,13 @@ dependencies=(
 check_dependencies() {    
     echo -e "${blue}[DEPENDENCY CHECK]${nc} Checking installed packages..."
     sleep 0.5
-    # Detect package manager 
-    if command -v pacman &> /dev/null; then
-        pm="pacman"
-        install_cmd="sudo pacman -S --noconfirm --needed"
-        check_cmd="pacman -Qi"
-    elif command -v apt &> /dev/null; then
-        pm="apt"
-        install_cmd="sudo apt install -y"
-        check_cmd="dpkg -s"
-        echo -e "${yellow}Note: Package names are optimized for Arch. Some might fail on apt.${nc}"
-        sleep 1
-    else
-        echo -e "${red}Error: Neither pacman nor apt found. Cannot install dependencies automatically.${nc}"
-        return
-    fi
+    install_cmd="sudo pacman -S --noconfirm --needed"
+    check_cmd="pacman -Qi"
+
     # Check for missing packages
     missing_pkg=()    
     for pkg in "${dependencies[@]}"; do
-        if ! $check_cmd "$pkg" &> /dev/null; then
+        if ! pacman -Qi "$pkg" &> /dev/null; then
             missing_pkg+=("$pkg")
         fi
     done
@@ -155,8 +147,8 @@ sleep 0.5
 
 # --- Font Installation Section ---
 mkdir -p "$font_dest"    
-echo -e "Copying fonts to ${yellow}$font_dest${nc}..."
-cp -r "$font_source"/* "$font_dest/"
+echo -e "Extracting fonts to ${yellow}$font_dest${nc}..."
+tar -xJf "$font_source" -C "$font_dest"
 sleep 0.5    
 echo -e "${blue}Updating font cache (this may take a moment)...${nc}"
 fc-cache -fv > /dev/null 2>&1
@@ -239,19 +231,16 @@ echo -e "${yellow}Generating Desktop Menu...${nc}"
 bash "$HOME/.config/labwc/menu-generator.sh"
 }
 
-# Check if labwc is running
-if pgrep -x "labwc" > /dev/null; then
-    echo -e "${green}labwc Session Detected${nc}"   
-    echo -e "${yellow}Refreshing Desktop...${nc}"
-    sleep 1
-else
-    generate_menu
-    echo -e "${green}Setup Complete Enjoy....${nc}"
-    exit 0      
-fi
-
+# Background Services
+background_services() {
+echo "-------------------------------------------------"
+echo -e "${yellow}Starting Background Services...${nc}"
+sleep 0.5   
+echo "-------------------------------------------------"
+echo -e "${red} killing existing instances of swww-daemon, dunst and waybar...${nc}"
 # Run swww-daemon, dunst and waybar
 killall -q -w swww-daemon dunst waybar
+sleep 0.5
 echo -e "${yellow}Initializing swww-daemon, notification and waybar...${nc}"
 sleep 0.5
 swww-daemon > /dev/null 2>&1 &
@@ -263,6 +252,38 @@ sleep 0.5
 waybar > /dev/null 2>&1 &
 echo -e "Started ${green}waybar${nc}"
 sleep 1
+
+# Device plugged audio
+echo "-------------------------------------------------"
+echo -e "${yellow}Starting Device Monitor in background...${nc}"
+bash ~/.config/labwc/device-monitor.sh >/dev/null 2>&1 &
+sleep 1
+# Idle device manager
+echo "-------------------------------------------------"
+echo -e "${yellow}Setting up Swayidle and Hyprlock...${nc}"
+swayidle -w \
+    timeout 300 "~/.config/labwc/idle/brightness_ctrl.sh --fade-out" \
+    resume "~/.config/labwc/idle/brightness_ctrl.sh --fade-in" \
+    timeout 600 "loginctl lock-session" \
+    timeout 1800 "systemctl suspend" \
+    lock "~/.config/labwc/idle/lock_ctrl.sh" \
+    before-sleep "~/.config/labwc/idle/sleep_ctrl.sh" \
+    after-resume "~/.config/labwc/idle/brightness_ctrl.sh --fade-in" \
+    > "$HOME/.config/labwc/idle/idle.log" 2>&1 &
+}
+
+
+# Check if labwc is running
+if pgrep -x "labwc" > /dev/null; then
+    echo -e "${green}labwc Session Detected${nc}"   
+    echo -e "${yellow}Refreshing Desktop...${nc}"
+    background_services
+    sleep 1
+else
+    generate_menu
+    echo -e "${green}Setup Complete Enjoy....${nc}"
+    exit 0      
+fi
 
 # Generate Desktop Menu
 generate_menu  
@@ -287,19 +308,6 @@ echo -e "${yellow}Choose waybar style:${nc}"
 sleep 1
 "$waybar_script"
 
-# Setup Swayidle and Hyprlock if user chose to exit later
-idle_manager() {
-echo "-------------------------------------------------"
-echo -e "${yellow}Setting up Swayidle and Hyprlock...${nc}"
-swayidle -w \
-    lock 'sh -c ~/.config/labwc/idle/lock_ctrl.sh' \
-    timeout 300 'sh -c ~/.config/labwc/idle/brightness_ctrl.sh' \
-    resume 'sh -c ~/.config/labwc/idle/brightness_ctrl.sh' \
-    timeout 600 'loginctl lock-session' \
-    before-sleep 'sh -c ~/.config/labwc/idle/sleep_ctrl.sh' \
-    after-resume 'sh -c ~/.config/labwc/idle/brightness_ctrl.sh' > "$HOME/.config/labwc/idle/idle.log" &
-}
-
 # Exit Prompt
 echo "-------------------------------------------------"
 echo -e "${red}IMPORTANT:${nc} Configuration is complete."
@@ -311,8 +319,6 @@ if [[ "$exit_choice" == "y" || "$exit_choice" == "Y" ]]; then
     labwc --exit 2>/dev/null 
 else
     echo -e "${green}Installation finished. Please restart your session manually later.${nc}"
-    echo -e "${green}For now, setting up Swayidle and Hyprlock in the background...${nc}"
-    idle_manager
 fi
 
 exit 0

@@ -40,7 +40,7 @@ textbox {
 /*****----- Input Bar -----*****/
 inputbar {
     enabled:                     true;
-    padding:                     0px;
+    padding:                     5px;
     margin:                      0px;
     background-color:            transparent;
     border:                      0px;     

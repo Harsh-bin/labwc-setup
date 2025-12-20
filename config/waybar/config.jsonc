@@ -127,14 +127,15 @@
         "format-disconnected": "󱛅 ",
         "format-disabled": "󱚼 ",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "tooltip-format-wifi": "  {essid} ({signalStrength}%)\nIP: {ipaddr}\nFreq: 5GHz",
+        "tooltip-format-wifi": "  {essid} ({signalStrength}%)\nIP: {ipaddr}\nFreq: {frequency}GHz",
         "tooltip-format-ethernet": "  {ifname}\nIP: {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
         "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
-        "on-click": "killall rofi || bash ~/.config/rofi/wifi/wifi.sh"
+        "on-click": "killall rofi || bash ~/.config/rofi/wifi/wifi.sh",
+        "on-click-right": "nm-connection-editor"
       },
 
-//// Custom Module {frequency}
+//// Custom Module 
 
 
       "custom/todo":
@@ -166,9 +167,9 @@
 
       "custom/launcher":
       {
-          "format": "<big></big>",
+          "format": "<big>\u00a0</big>",
           "tooltip": true,
-          "tooltip-format": "Menu\nRight click to change theme",
+          "tooltip-format": "Menu\nRight click to customize",
           "on-click": "killall rofi 2>/dev/null || bash ~/.config/rofi/launchers/launcher.sh 2>/dev/null",
           "on-click-right": "killall rofi 2>/dev/null || bash ~/.config/waybar/scripts/customize.sh 2>/dev/null"
       },
@@ -248,7 +249,7 @@
       
       "custom/theme-switcher":
       {
-          "format": "<big>󰔎 </big>",
+          "format": "<big>󰔎\u00a0</big>",
           "tooltip": true,
           "tooltip-format": "Light/Dark",
           "on-click": "bash ~/.config/waybar/scripts/toggle-theme.sh 2>/dev/null"
