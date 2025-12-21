@@ -1,5 +1,5 @@
 /** Main waybar css **/
-/** You shouldn't edit this file directly, instead edit the imported files **/
+
 
 /** just to triggre css refresh **/
 
@@ -8,10 +8,10 @@
 @import "colors/wallpaper.css";
 
 /** Imports a layout (style) for bar **/
-@import "layouts/outline.css";
+@import "layouts/square.css";
 
 
 /** Sets bar background transparency **/
 window#waybar {
-    background: alpha(@bar_bg, 0);
+    background: alpha(@bar_bg, 1);
 }

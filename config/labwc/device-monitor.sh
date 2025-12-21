@@ -18,5 +18,5 @@ while true; do
         done
     }    
     paplay "$AUDIO_FILE"
-    sleep 0.5
+    sleep 1
 done

@@ -10,7 +10,7 @@ output_path = '~/.config/rofi/colors/wallpaper.rasi'
 
 [templates.labwc]
 input_path = '~/.config/matugen/templates/labwc.conf'
-output_path = '~/.config/labwc/themerc-override'
+output_path = '~/.config/labwc/colors/wallpaper.color'
 post_hook = 'labwc --reconfigure'
 
 [templates.gtk3]

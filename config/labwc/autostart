@@ -12,7 +12,7 @@ swww-daemon >/dev/null 2>&1 &
 
 # Polkit 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &
- 
+
 # Gtk Theme Refresh
 bash ~/.config/labwc/gtk.sh >/dev/null 2>&1 &
 
@@ -36,5 +36,5 @@ swayidle -w \
     lock "~/.config/labwc/idle/lock_ctrl.sh" \
     before-sleep "~/.config/labwc/idle/sleep_ctrl.sh" \
     after-resume "~/.config/labwc/idle/brightness_ctrl.sh --fade-in" \
-    > "$HOME/.config/labwc/idle/idle.log" 2>&1 &
+    >/dev/null 2>&1 &
 

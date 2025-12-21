@@ -56,10 +56,10 @@ listbox {
 inputbar {
     enabled:                     true;
     margin:                      10px 10px 0px 10px ;
-    padding:                     100px 40px;
+    padding:                     80px 10px;
     background-color:            transparent;
     border-radius:               20px;
-    background-image:            url("~/.config/rofi/images/wallpaper.png", height);
+    background-image:            url("~/.config/rofi/images/wallpaper.png", width);
     text-color:                  @foreground;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry" ];

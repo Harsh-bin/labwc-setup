@@ -1,10 +1,10 @@
 /* --- matugen gtk4-colors.css --- */
 
-@define-color accent_color #dfc56d;
-@define-color accent_fg_color #231b00;
-@define-color accent_bg_color #dfc56d;
-@define-color window_bg_color #16130b;
-@define-color window_fg_color #e9e2d4;
+@define-color accent_color #b9cf83;
+@define-color accent_fg_color #151f00;
+@define-color accent_bg_color #b9cf83;
+@define-color window_bg_color #12140d;
+@define-color window_fg_color #e3e3d7;
 @define-color headerbar_bg_color @window_bg_color;
 @define-color headerbar_fg_color @window_fg_color;
 @define-color popover_bg_color @window_bg_color;
@@ -17,7 +17,7 @@
 @define-color sidebar_fg_color @window_fg_color;
 @define-color sidebar_backdrop_color @window_bg_color;
 @define-color sidebar_border_color @border;
-@define-color button #38342b;
-@define-color border #dfc56d80;
+@define-color button #34362d;
+@define-color border #b9cf8380;
 @define-color accent_hover_glass color-mix(in srgb, @accent_bg_color 15%, transparent);
 @define-color accent_selected_glass color-mix(in srgb, @accent_bg_color 30%, transparent);

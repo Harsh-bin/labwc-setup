@@ -30,33 +30,33 @@ style = { shape = "Block", blinking = "Off" }
 [colors]
 
 [colors.primary]
-background = "#16130b"
-foreground = "#e9e2d4"
+background = "#12140d"
+foreground = "#e3e3d7"
 
 [colors.cursor]
-text   = "#16130b"
-cursor = "#dfc56d"
+text   = "#12140d"
+cursor = "#b9cf83"
 
 [colors.selection]
-text       = "#16130b"
-background = "#dfc56d"
+text       = "#12140d"
+background = "#b9cf83"
 
 [colors.normal]
-black   = "#cec6b4"
+black   = "#c6c8b8"
 red     = "#ffb4ab"
-green   = "#dfc56d"
-yellow  = "#abd0b1"
-blue    = "#fce186"
-magenta = "#f0e2bb"
-cyan    = "#d3c6a1"
-white   = "#e9e2d4"
+green   = "#b9cf83"
+yellow  = "#a1d0c7"
+blue    = "#d4ec9d"
+magenta = "#dee6c5"
+cyan    = "#c2caaa"
+white   = "#e3e3d7"
 
 [colors.bright]
-black   = "#cec6b4"
+black   = "#c6c8b8"
 red     = "#ffb4ab"
-green   = "#dfc56d"
-yellow  = "#abd0b1"
-blue    = "#fce186"
-magenta = "#f0e2bb"
-cyan    = "#d3c6a1"
-white   = "#e9e2d4"
+green   = "#b9cf83"
+yellow  = "#a1d0c7"
+blue    = "#d4ec9d"
+magenta = "#dee6c5"
+cyan    = "#c2caaa"
+white   = "#e3e3d7"

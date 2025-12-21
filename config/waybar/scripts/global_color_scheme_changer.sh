@@ -4,8 +4,10 @@
 rofi_colors_dir="$HOME/.config/rofi/colors"
 rofi_colors="$HOME/.config/rofi/shared/colors.rasi"
 waybar_css="$HOME/.config/waybar/style.css"
-#gtk3_css="$HOME/.config/gtk-3.0/gtk.css"
-#gtk4_css="$HOME/.config/gtk-4.0/gtk.css"
+gtk3_css="$HOME/.config/gtk-3.0/gtk.css"
+gtk4_css="$HOME/.config/gtk-4.0/gtk.css"
+labwc_theme_file="$HOME/.config/labwc/themerc-override"
+labwc_theme_dir="$HOME/.config/labwc/colors"
 
 # rofi vertical menu
 rofi_vertical_menu="$HOME/.config/rofi/vertical_style_menu.rasi"
@@ -21,6 +23,9 @@ selected_color=$(echo -e "$color_options" | rofi -dmenu -mesg "<b>Select Color S
 if [ -n "$selected_color" ]; then   
     sed -i "3s|.*|@import \"~/.config/rofi/colors/${selected_color}.rasi\"|" "$rofi_colors"
     sed -i "8s|.*|@import \"colors/${selected_color}.css\";|" "$waybar_css"    
-#    sed -i "2s|.*|@import \"colors/${selected_color}.css\";|" "$gtk3_css" 
-#    sed -i "2s|.*|@import \"colors/${selected_color}.css\";|" "$gtk4_css" 
+    sed -i "2s|.*|@import \"colors/${selected_color}.css\";|" "$gtk3_css" 
+    sed -i "2s|.*|@import \"colors/${selected_color}.css\";|" "$gtk4_css" 
+    cp "$labwc_theme_dir/${selected_color}".color "$labwc_theme_file"
+    # Reloads labwc
+    labwc --reconfigure
 fi

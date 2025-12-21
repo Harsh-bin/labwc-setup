@@ -7,14 +7,20 @@
 # Change path to wallpaper
 wall_dir="/home/init_harsh/Templates/wallpapers/"
 
+# Directories to copy wallpaper
 rofi_img="$HOME/.config/rofi/images/"
 wall_cache="$HOME/.config/labwc/wallpaper/"
 # rofi menu file
 horizontal_menu="$HOME/.config/rofi/horizontal_menu.rasi"
 
-# used for setting color scheme from wallpaper
+# Path to the files that imports the color scheme
 rofi_colors="$HOME/.config/rofi/shared/colors.rasi"
 waybar_css="$HOME/.config/waybar/style.css"
+gtk3_css="$HOME/.config/gtk-3.0/gtk.css"
+gtk4_css="$HOME/.config/gtk-4.0/gtk.css"
+labwc_theme_file="$HOME/.config/labwc/themerc-override"
+labwc_theme_dir="$HOME/.config/labwc/colors"
+
 # Hyprlock 
 hyprlock_conf="$HOME/.config/hypr/hyprlock.conf"
 hyprlock_dir="$HOME/.config/hypr/hyprlock"
@@ -24,6 +30,8 @@ GTK_THEME_SWITCHER="$HOME/.config/labwc/gtk.sh"
 # Gtk configs
 GTK3_SETTINGS_FILE="$HOME/.config/gtk-3.0/settings.ini"
 GTK4_SETTINGS_FILE="$HOME/.config/gtk-4.0/settings.ini"
+
+
 
 # Check if GTK3 settings file exists
 if [ ! -f "$GTK3_SETTINGS_FILE" ]; then
@@ -49,6 +57,18 @@ set_wallpaper() {
     swww img --transition-type random --transition-duration 3 --transition-fps 60 --transition-bezier 0.99,0.99,0.99,0.99 "$selected" &
 }
 
+# Change color scheme to wallpaper function
+change_color_scheme_to_wallpaper() {
+          # Apply only wallpaper color scheme
+        sed -i "3s|.*|@import \"~/.config/rofi/colors/wallpaper.rasi\"|" "$rofi_colors"
+        sed -i "8s|.*|@import \"colors/wallpaper.css\";|" "$waybar_css"         
+        sed -i "2s|.*|@import \"colors/wallpaper.css\";|" "$gtk3_css" 
+        sed -i "2s|.*|@import \"colors/wallpaper.css\";|" "$gtk4_css" 
+        cp "$labwc_theme_dir/wallpaper.color" "$labwc_theme_file"
+        # Reloads labwc
+        labwc --reconfigure
+}
+
 # --- Main Menu ---
 main_options="Yes\nNo"
 main_choice=$(echo -e "$main_options" | rofi -dmenu -mesg "<b>Set Color Scheme from wallpaper?</b>" -theme "$horizontal_menu")
@@ -60,10 +80,12 @@ case "$main_choice" in
         choice=$(echo -e "$options" | rofi -dmenu -mesg "<b>Select Color Scheme</b>" -theme "$horizontal_menu")
         case "$choice" in
              "Light")
+                # Generates light color scheme from wallpaper
                 matugen image "$selected" -m "light"                
                 sleep 0.2s
-                sed -i "3s|.*|@import \"~/.config/rofi/colors/wallpaper.rasi\"|" "$rofi_colors"
-                sed -i "8s|.*|@import \"colors/wallpaper.css\";|" "$waybar_css"
+                # Sets color scheme to wallpaper
+                change_color_scheme_to_wallpaper
+                # Applies wallpaper
                 set_wallpaper
                 # Sets light theme for gtk apps
                 sed -i 's/gtk-application-prefer-dark-theme=1/gtk-application-prefer-dark-theme=0/' "$GTK3_SETTINGS_FILE"
@@ -73,10 +95,12 @@ case "$main_choice" in
                 echo "Switched to light theme."
                 ;;
               "Dark")
+                # Generates dark color scheme from wallpaper
                 matugen image "$selected" -m "dark"
                 sleep 0.2s
-                sed -i "3s|.*|@import \"~/.config/rofi/colors/wallpaper.rasi\"|" "$rofi_colors"
-                sed -i "8s|.*|@import \"colors/wallpaper.css\";|" "$waybar_css"
+                # Sets color scheme to wallpaper
+                change_color_scheme_to_wallpaper
+                # Applies wallpaper 
                 set_wallpaper
                 # Sets dark theme for gtk apps
                 sed -i 's/gtk-application-prefer-dark-theme=0/gtk-application-prefer-dark-theme=1/' "$GTK3_SETTINGS_FILE"
@@ -92,8 +116,8 @@ case "$main_choice" in
         # Sets wallpaper only
         set_wallpaper        
         ;;
-    *)
-    exit 0
+     *)
+       exit 0
         ;;
 esac
 
@@ -101,6 +125,7 @@ esac
 # Rofi doesn't care about file extension 
 cp "$selected" "$rofi_img/wallpaper.png"
 
+# Get the file extension of the selected wallpaper
 extension=$(echo "$selected" | sed -E 's/.*(\.[a-zA-Z0-9]+)$/\1/')
 # cp the wallpaper for hyprlock background
 if [ ${extension} = ".gif" ]; then

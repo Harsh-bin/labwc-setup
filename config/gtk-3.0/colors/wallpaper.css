@@ -1,10 +1,10 @@
 /* --- matugen gtk3-colors.css --- */
 
-@define-color accent_color #dfc56d;
-@define-color accent_fg_color #231b00;
-@define-color accent_bg_color #dfc56d;
-@define-color window_bg_color #16130b;
-@define-color window_fg_color #e9e2d4;
+@define-color accent_color #b9cf83;
+@define-color accent_fg_color #151f00;
+@define-color accent_bg_color #b9cf83;
+@define-color window_bg_color #12140d;
+@define-color window_fg_color #e3e3d7;
 @define-color view_bg_color @window_bg_color;
 @define-color view_fg_color @window_fg_color;
 @define-color headerbar_bg_color @window_bg_color;
@@ -16,7 +16,7 @@
 @define-color sidebar_bg_color @window_bg_color;
 @define-color sidebar_fg_color @window_fg_color;
 @define-color sidebar_backdrop_color @window_bg_color;
-@define-color button_bg #38342b;
+@define-color button_bg #34362d;
 @define-color accent_hover_glass alpha(@accent_bg_color, 0.15);
 @define-color accent_selected_glass alpha(@accent_bg_color, 0.30);
 @define-color theme_selected_bg_color @accent_hover_glass;

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#####################################
+## author @Harsh-bin Github #########
+#####################################
+
 # Fade out/in screen brightness smoothly 
 
 # Brightness cache file
@@ -13,7 +17,6 @@ fade_out_screen() {
     if [ "$current_val" -eq "0" ]; then
         echo "Screen already at 0% brightness. No fade out needed."
         # saves the current value so faddding screen in doesn't crashes.
-        echo "saving o to cache file"
         echo "$current_val" > "$cache_file"
         return 0
     else
@@ -21,8 +24,7 @@ fade_out_screen() {
         # saves the current value so it can be used later
         echo "$current_val" > "$cache_file"   
         # loop from current brightness to 0     
-        echo "Fading OUT..."        
-        echo "saving $current_val to cache file"
+        echo "Fading OUT..."
         for (( i=current_val; i>=0; i-=step )); do
             brightnessctl -q set "${i}%"
             sleep 0.01
@@ -42,7 +44,6 @@ fade_in_screen() {
             return 0   
         else
             echo "Fading IN..."
-            echo "Reaching to $target_val to cache file"
             # loop from current_val to target brightness
             for (( i=current_val; i<=target_val; i+=step )); do
             brightnessctl -q set "${i}%"
