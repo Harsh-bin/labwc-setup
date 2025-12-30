@@ -283,7 +283,7 @@ A ready to use configuration for **Labwc** wayland compositor with 19 preconfigu
 **Arch Linux Users:**
 ```bash
 git clone https://github.com/Harsh-bin/modern-labwc/
-cd labwc-setup
+cd modern-labwc
 chmod +x setup.sh
 ./setup.sh
 ```
